@@ -21,9 +21,10 @@ for gene, link in gene_link_dic.items():
         selector2tr = 'div.container-fluid div:nth-child(4) div.col-lg-12 div.tab-content div#geneVariants tbody tr'
         gene_variants_tr_list = r.html.find(selector2tr)
         # gene_variants_tr_html = HTML(gene_variants_tr_list)
+        dict2json[gene] = []
         for variant in gene_variants_tr_list:
             variant_info_list = variant.find('td')
-            dict2json[gene]={'Variant':variant_info_list[0].text, 'Imapct':variant_info_list[1].text, 'Protein Effect':variant_info_list[2].text, 'Variant Description':variant_info_list[3].text, 'Associated with drug Resistance':variant_info_list[4].text}
+            dict2json[gene].append({'Variant':variant_info_list[0].text, 'Imapct':variant_info_list[1].text, 'Protein Effect':variant_info_list[2].text, 'Variant Description':variant_info_list[3].text, 'Associated with drug Resistance':variant_info_list[4].text})
 
 with open('gene_data.json', 'w') as f:
     json.dump(dict2json, f)
