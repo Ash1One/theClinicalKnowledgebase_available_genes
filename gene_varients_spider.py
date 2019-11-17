@@ -8,7 +8,6 @@ import json
 dict2json = {}
 session = HTMLSession()
 r = session.get('https://ckb.jax.org/gene/grid')
-#print(r.html.links)
 print(len(r.html.links))
 
 gene_link_dic = {gene.text:tuple(gene.absolute_links)[0] for gene in r.html.find('div.container-fluid div:nth-child(3) a')}
